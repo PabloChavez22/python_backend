@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        
+        <link rel="stylesheet" type="text/css" href="./css/style-menu.css">
+        <link rel="stylesheet" type="text/css" href="./css/style-color-letra.css">
+        <link rel="stylesheet" type="text/css" href="./css/style-sections.css">
+        
+        <title>Programate</title>
+
+        <script src="https://kit.fontawesome.com/8fa71a03bd.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>Proyecto Python</h1>
+        <div>
+            <table>
+                <thead>
+                    <th>#</th>
+                    <th>Correo</th>
+                    <th>Password</th>
+                </thead>
+            
+                <tbody><!--como se llama en db-->
+                    {% for d in data %}
+                        <tr>
+                            <td>{{d.id}}</td>
+                            <td>{{d.correo}}</td>
+                            <td>{{d.password}}</td>
+                            <td>{{d.nivel_organizativo}}</td>
+                            <td>{{d.nombre}}</td>
+                            <td>{{d.apellido}}</td>
+                            <td>{{d.fecha_nacimiento}}</td>
+                            <td>{{d.genero}}</td>
+                            <td>{{d.pais}}</td>
+                            <td>{{d.notificaciones}}</td>
+                            <td>{{d.terminos_condiciones}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+</html>

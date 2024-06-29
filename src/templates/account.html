@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-account.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-color-letra.css') }}">
+
+        <title>Programate - inicio de sesion</title>
+    
+        <script src="https://kit.fontawesome.com/8fa71a03bd.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        
+        <section class="alto-ancho">
+
+            <div class="logo-cuenta">
+
+                <div class="logo">
+
+                    <div class="titulo">
+                        <h1>Progra</h1><img src="../static/img/mateR.jpg" alt="logo-programate">
+                    </div>
+                    <h2 class="titulo-h2">Iniciar sesion</h2>
+                </div>
+
+                <div class="cuenta">
+                    {% if mensaje %} <!--mensaje py-->
+                    {{ mensaje }}
+                    {% endif %}
+                    <!--crear formulario para inicio sesion--><!--esta get visible y post inf protegido -->
+                    <form action="/user" method="post" enctype="text/plain" class="ingresar" id="inicio-sesion">
+                        <div class="user">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <label for="email">Email :</label>
+                        <input type="email" id="email" name="txtcorreo" maxlength="27" required placeholder="email@email.com">
+                        <label for="pass">Ingresa tu contraseña :</label>
+                        <input type="password" id="pass" name="txtpassword" maxlength="27" required placeholder="contraseña...">
+                        <input type="submit" value="Ingresar" class="submit">
+                    </form>
+
+                    <p>No tiene cuenta,<a href="#" class="btn-registrarse">Registrarse</a>.</p>
+                </div>
+                
+                <div class="caja_formulario oculto">
+                    <!--aca agregar el formulario-->
+                    <form action="/user_create" method="get" enctype="text/plain" id="crear-cuenta" class="datos-form">
+                        <fieldset class="datos-form">
+                            <legend>Datos personales</legend>
+                        
+                            <label for="name">Ingrese su nombre</label>
+                            <input type="text" id="name" name="name" minlength="2" maxlength="23" required placeholder="Nombre">
+                            
+                            <label for="surname">Ingrese su apellido</label>
+                            <input type="text" id="surname" name="surname" minlength="2" maxlength="23" required placeholder="Apellido">
+                            
+                            <label for="fecha-nacimiento">Ingrese fecha de nacimiento</label>
+                            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" min="1900-01-01" max="2024-05-30">
+                            <div class="genero">
+                                <label>Genero</label>
+                                <label>F<input type="radio" value="F" name="option_genero"></label>
+                                <label>M<input type="radio" value="M" name="option_genero"></label>
+                            </div>
+                            <p>
+                                <label for="pais">Seleccione Pais </label>
+                                <select name="pais" id="pais">
+                                    <option value="ARGENTINA">Argentina</option>
+                                    <option value="otro">Otro...</option>
+                                </select>
+                            </p>
+                            <div id="otro-pais">
+                                <label >Pais <input type="text" id="nombrePais" name="nombrePais" placeholder="Ingrese Pais..." minlength="3" maxlength="17" size="17"></label>
+                            </div>
+                        </fieldset>
+                        <label for="email1">Ingrese su email</label>
+                        <input type="email" id="email1" name="email" maxlength="27" required placeholder="example@email.com">
+                        
+                        <label for="passw">Crear contraseña</label>
+                        <input type="password" id="passw" name="passw" minlength="4" maxlength="20" required placeholder="***">
+                        
+                        <label for="passw-two">Repita contraseña</label>
+                        <input type="password" id="passw-two" name="passw-two" minlength="4" maxlength="20" required placeholder="***">
+
+                        <div class="terminos">
+                            <input type="checkbox" id="notificaciones" name="notificaciones" checked="checked" >
+                            <label for="notificaciones">Recibir notificaciones</label>
+                        </div>
+                        <div class="terminos">
+                            <input type="checkbox" id="check" name="check" required>
+                            <label for="check">Acepto los terminos y condiciones.</label>
+                        </div>
+                        
+                        <input type="submit" value="Crear" class="submit">
+                        
+                    </form>
+                    <!--termina form-->
+                    <button class="btn-cancelar-formulario">Cancelar</button>
+                </div>
+            </div>
+
+            <div class="pie">
+                <!--creacion de a (que no dirijan a ningun lugar) y volver redirija a pag.principal, completados-->
+                <a href="{{ url_for('home') }}">volver </a>
+                <a href="#" id="ayuda2">ayuda</a>
+                <a href="#" id="privacidad2">privacidad</a>
+                <a href="#" id="condiciones2">condiciones</a>
+
+                <div id="ayuda1" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="ayuda3">&times;</span>
+                        <h2>Ayuda</h2>
+                        <hr>
+                        <p>Para ingresar necesita estar registrado.</p>
+                        <p>Accede con: email y contraseña previamente creada.</p>
+                        <p>Para crear una cuenta, 'click izquierdo' en Registrarse y completar los campos.</p>
+                        <p>Para volver a pagina principal 'click izquierdo' en volver.</p>
+                        <p>Para conocer la privacidad de los datos 'click izquierdo' en privacidad.</p>
+                        <p>Para ver condiciones 'click izquierdo' en condiciones.</p>
+                        <p>Para contactar al programador ir a sección programadores en menu principal.</p>
+                    </div>
+                </div>
+                
+                <div id="privacidad1" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="privacidad3">&times;</span>
+                        <h2>Privacidad</h2>
+                        <hr>
+                        <p>Esta página no almacena datos personales privados.</p>
+                        <p>Está diseñada para demostrar el manejo de html, css, js y otros.</p>
+                    </div>
+                </div>
+                
+                <div id="condiciones1" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="condiciones3">&times;</span>
+                        <h2>Condiciones de uso</h2>
+                        <hr>
+                        <p>Página diseñada para demostrar el manejo y funcionalidad de herramientas de programación.</p>
+                        <p>Nos alegra que disfrutes del diseño y las funcionalidades de nuestra web.</p>
+                        <p>Si decides inspirarte o utilizar algún elemento de nuestro sitio, nos encantaría que mencionaras al programador en reconocimiento de su trabajo.</p>
+                        <p>Un simple agradecimiento puede hacer una gran diferencia y es muy apreciado.</p>
+                        <p>¡Gracias por tu consideración y apoyo!</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='javascript/scriptAccount.js') }}"></script>
+    </body>
+
+</html>

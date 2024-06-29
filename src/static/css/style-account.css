@@ -1,0 +1,316 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--color-sesion-fondo);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alto-ancho {           /*medidas del recuadro*/
+    height: 33rem;
+    width: 58rem;
+
+    padding: 3rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: var(--color-sesion-fondo);
+}
+
+.pie {                  
+    width: 100%;
+    height: 4rem;
+    padding-right: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pie a{    /*aca esta el boton volver*/
+    margin: 0 .2rem;
+    text-decoration: none;
+}
+
+.logo-cuenta {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1.5rem;
+}
+
+.logo {
+    width: 50%;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 1rem;
+}
+
+.titulo h1 {
+    color: var(--color-menu); /*agrego el color de la img*/
+}
+
+.titulo img {       
+    width: 3rem;
+    height: auto;
+    margin-bottom: .5rem;
+
+    animation: rotateLeftRight 3s;
+    animation-iteration-count: 5;
+    animation-delay: 2s;
+}
+/* Animación solo 5 iteraciones */
+@keyframes rotateLeftRight {
+    0% {
+        transform: rotate(5deg); /* Gira 5 grados a la derecha */
+    }
+    50% {
+        transform: rotate(-5deg); /* Gira 5 grados a la izquierda */
+    }
+    100% {
+        transform: rotate(5deg); /* Vuelve a girar 5 grados a la derecha */
+    }
+}
+
+.cuenta {
+    padding-top: 4rem; /*altura del titulo y espacio*/
+    width: 50%;
+}
+.cuenta p{
+    text-align: right;
+    margin-top: 10px;
+}
+.oculto {
+    display: none;
+}
+/*adaptacion a pantallas de tablet y celular*/
+
+@media(max-width: 960px) {
+    .alto-ancho {
+        height: 100vh;
+        width: 100%;
+    
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
+        border: solid 1px;
+        background-color: var(--color-sesion-fondo);
+    }
+    .logo-cuenta { 
+        border-radius: 0;
+    }
+    .pie {
+        background-color: white;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .logo-cuenta {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    
+        background-color: white;
+        padding: 2rem;
+        border-radius: 1.5rem;
+
+        .logo{
+            width: auto;
+        }
+        .cuenta{
+            width: 100%;
+        }
+    }
+}
+
+/****************************************************
+*  Form                                             *
+****************************************************/
+.ingresar{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    overflow: hidden;
+
+    width: 100%;
+    height: auto;
+}
+
+.user{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 3.5rem;
+    height: 3.5rem;
+    border: solid 3px;
+    border-radius: 2rem;   
+    margin: 0 auto;
+}
+.user i{
+    font-size: xxx-large;
+}
+#inicio-sesion input{
+    margin: .2rem 0 .3rem 0;
+    padding: .3rem;
+    padding-left: 1rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: lightgrey;
+    font-size: large;
+}
+#inicio-sesion .submit{
+    width: fit-content;
+    width: -moz-fit-content;
+    padding: 4.8px;
+
+    background-color: lightgreen;
+    border: solid 3px lightgreen;
+    cursor: pointer;
+    margin: 0 auto;
+    font-family: Cambria, Georgia, serif;
+    font-size: medium;
+}
+    #inicio-sesion .submit:hover{
+        background-color: green;     
+        color: white;   
+    }
+/****************************************************
+*  Form              crear cuenta                   *
+****************************************************/
+.caja_formulario{
+    overflow: overlay;
+}
+.datos-form{
+    display: flex;
+    flex-wrap: wrap;
+    
+    flex-direction: column;
+    overflow: hidden;
+
+}
+
+.datos-form input, select{
+    margin: .2rem 0 .3rem 0;
+    padding: .3rem;
+    padding-left: 1rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: lightgrey;
+    font-size: large;
+}
+.genero{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.genero label {
+    margin: 0 .2rem 0 .2rem;
+}
+
+.terminos{
+    display: flex;
+}
+
+.datos-form fieldset {
+    padding: 2%;
+    margin-bottom: .5rem;
+}
+.datos-form .submit{
+    width: fit-content;
+    width: -moz-fit-content;
+    padding: 4.8px;
+
+    background-color: lightgreen;
+    border: solid 3px lightgreen;
+    cursor: pointer;
+    margin: 0 auto;
+    font-family: Cambria, Georgia, serif;
+    font-size: medium;
+}
+     .submit:hover{
+        background-color: green;     
+        color: white;   
+    }
+
+.btn-cancelar-formulario{
+    width: fit-content;
+    width: -moz-fit-content;
+    padding: 4.8px;
+
+    background-color: lightcoral;
+    border: solid 3px lightcoral;
+    border-radius: 2rem;
+    cursor: pointer;
+    display: flex;
+    margin: 4px auto;
+    font-family: Cambria, Georgia, serif;
+    font-size: medium;
+}
+    .btn-cancelar-formulario:hover{
+        background-color: red;
+        color: white;
+    }
+
+/*******************modal********************/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 1rem;
+    width: 80%;
+    max-width: 500px;
+  }
+.modal-content hr{
+    margin: 1rem;
+    background: #ccc;
+    height: 1px;
+    border: 0;
+}
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

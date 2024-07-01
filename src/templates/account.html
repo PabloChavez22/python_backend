@@ -48,7 +48,7 @@
                 
                 <div class="caja_formulario oculto">
                     <!--aca agregar el formulario-->
-                    <form action="/user_create" method="get" enctype="text/plain" id="crear-cuenta" class="datos-form">
+                    <form action="{{ url_for('registrar_usuario') }}" method="POST" id="crear-cuenta" class="datos-form">
                         <fieldset class="datos-form">
                             <legend>Datos personales</legend>
                         
@@ -86,11 +86,11 @@
                         <input type="password" id="passw-two" name="passw-two" minlength="4" maxlength="20" required placeholder="***">
 
                         <div class="terminos">
-                            <input type="checkbox" id="notificaciones" name="notificaciones" checked="checked" >
+                            <input type="checkbox" id="notificaciones" name="notificaciones" value="1" checked="checked" >
                             <label for="notificaciones">Recibir notificaciones</label>
                         </div>
                         <div class="terminos">
-                            <input type="checkbox" id="check" name="check" required>
+                            <input type="checkbox" id="check" name="check" value="1" required>
                             <label for="check">Acepto los terminos y condiciones.</label>
                         </div>
                         

@@ -17,7 +17,7 @@ template_dir=os.path.join(template_dir, 'src','templates')
 
 #indicamos que se busque el archivo index.html o el archivo q tengo el account al ejecutarse
 
-app=Flask(__name__,template_folder=template_dir)
+app=Flask(__name__)
 
 #vamos a generar nuestra primera ruta para poder ejecutar.
 #ruta de la app
@@ -40,68 +40,51 @@ def home():
     return render_template('account.html', data=insertObject)
 
 #Ruta para guardar usuarios en la bd
-@app.route('/user_create', methods=['POST'])
-def addUser():
-    correo = request.form['email']
-    password = request.form['passw']
-    nombre = request.form['name']
-    apellido = request.form['surname']
-    fecha_nacimiento = request.form['fecha-nacimiento']
-    genero = request.form['option_genero']
-    pais = request.form['pais']
-    notificaciones = request.form['notificaciones']
-    terminos_condiciones = request.form['check']
-#(correo, password, nivel_organizativo, nombre, apellido, fecha_nacimiento, genero, pais, notificaciones, terminos_condiciones)
-    if correo and password and nombre and apellido and terminos_condiciones:
+@app.route('/user_create', methods=['GET','POST'])
+def registrar_usuario():
+    if request.method == 'POST'
+        #obteniendo datos del form
+        correo = request.form.get('email')
+        password = request.form.get('passw')
+        nombre = request.form.get('name')
+        apellido = request.form.get('surname')
+        fecha_nacimiento = request.form.get('fecha-nacimiento')
+        genero = request.form.get('option_genero')
+        pais = request.form.get('pais')
+        notificaciones = int (request.form.get('notificaciones'))
+        terminos_condiciones = int (request.form.get('check'))
+
+        #verifico pais.
+        if pais == "otro":
+            pais = request.form.get('nombrePais')
+        #checkeds
+        if notificaciones != 1:
+            notificaciones = 0
+        if terminos_condiciones != 1:
+            terminos_condiciones = 0
+
+        #verificacion que los campos no den null
+        if not correo or not password or not nombre or not apellido or not fecha_nacimiento or not genero or not pais or not terminos_condiciones:
+            return "Error: faltan campos requeridos."
+
+        #insertar los datos en la db
         cursor = db.database.cursor()
-        sql = "INSERT INTO usuarios (correo, password, nombre, apellido, fecha_nacimiento, genero, pais, notificaciones, terminos_condiciones) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        data = (correo, password, nombre, apellido, fecha_nacimiento, genero, pais, notificaciones, terminos_condiciones)
-        cursor.execute(sql, data)
+        query = """
+        INSERT INTO usuarios (correo, password, nombre, apellido, fecha_nacimiento, genero, pais, notificaciones, terminos_condiciones) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        """
+        cursor.execute(query,(correo,password,nombre,apellido,fecha_nacimiento,genero,pais,notificaciones,terminos_condiciones))
         db.database.commit()
-    return redirect(url_for('vista'))
-  #  return redirect(url_for('home'))
-   # return render_template('vista.html')
-   
 
-@app.vista()
-def vista():
-    return render_template('vista.html')
-"""
-@app.account('account')
-def account():
-    return render_template('account.html')
+        #cerrando el cursor
+        cursor.close()
+        #redirigiendo a página home, en home poner despues el index, cuando quede bien.
+    return redirect(url_for('home'))
 
-#Funcion de LOGIN
-@app.account('//user',methods=["GET", "POST"])
-def login():
-    if request.method == 'POST' and 'txtcorreo' in request.form and 'txtpassword':
-        _correo = request.form['txtcorreo']
-        _password = request.form['txtpassword']
-
-        #empieza a utilizar db
-        
-        cur-mysql.connection.cursor()
-        cur.execute('SELECT * FROM usuarios WHERE correo = %s AND password = %s',(_correo,_password,))
-        account = cur.fetchone()
-        #termina de utilizar db.
-
-        if account:
-            session['logueado'] = True
-            session['id'] = account['id']
-
-            return render_template("index.html")
-        else:
-
-            return render_template("account.html",mensaje="usuario incorrecto")
-
-    return render_template('index.html')
-"""
-#registro---
-
+#eliminé el resto para limpiar vista del .py
 
 #ejecucion directa del archivo, en el puerto localhost 4000
 if __name__ =='__main__':
-    app.run(debug= True,port=4000)
+    app.run(debug= True) #elimine el puerto para que no produsca error.
 
 #luego ejecutamos (http /127.0.0 xxx) hacer un click y nos envie al navegador
 #si no se ejecuta directamente, en el navegador colocar localhost:4000.

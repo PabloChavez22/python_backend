@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="./css/style-menu.css">
         <link rel="stylesheet" type="text/css" href="./css/style-color-letra.css">
         <link rel="stylesheet" type="text/css" href="./css/style-sections.css">
+        <link rel="stylesheet" href="../static/prueba.css">
         
         <title>Programate</title>
 
@@ -15,33 +16,72 @@
     </head>
     <body>
         <h1>Proyecto Python</h1>
-        <div>
-            <table>
-                <thead>
-                    <th>#</th>
-                    <th>Correo</th>
-                    <th>Password</th>
-                </thead>
-            
-                <tbody><!--como se llama en db-->
-                    {% for d in data %}
-                        <tr>
-                            <td>{{d.id}}</td>
-                            <td>{{d.correo}}</td>
-                            <td>{{d.password}}</td>
-                            <td>{{d.nivel_organizativo}}</td>
-                            <td>{{d.nombre}}</td>
-                            <td>{{d.apellido}}</td>
-                            <td>{{d.fecha_nacimiento}}</td>
-                            <td>{{d.genero}}</td>
-                            <td>{{d.pais}}</td>
-                            <td>{{d.notificaciones}}</td>
-                            <td>{{d.terminos_condiciones}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </body>
+        h2>Tabla base de datos</h2>
+<div>
+  <form action="">
 
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="Username" name="usrnm">
+    </div>
+  
+    <div class="input-container">
+      <i class="fa fa-envelope icon"></i>
+      <input class="input-field" type="text" placeholder="Email" name="email">
+    </div>
+  
+    <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Password" name="psw">
+    </div>
+  
+    <button type="submit" class="btn">Register</button>
+  </form>
+</div>
+<!--        TABLA      -->
+<div style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>id</th>
+      <th>correo</th>
+      <th>Contraseña</th>
+      <th>Nivel_organizativo</th> <!--ni idea que es-->
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Fecha</th>
+      <th>Genero</th>
+      <th>Pais</th>
+      <th>Notificaciones</th>
+      <th>Terminos_Condiciones</th>
+      <th>Editar</th>
+      <th>Delet</th>
+    </tr>
+    <tbody>
+      {% for d in data %}
+        <tr>
+          <td>{{d.id}}</td> <!-- ID -->
+          <td>{{d.correo}}</td> <!-- CORREO -->
+          <td>{{d.password}}</td> <!-- CONTRASEÑA -->
+          <td>{{d.nivel_organizativo}}</td> <!-- NIVEL_ORGANIZATIVO -->
+          <td>{{d.nombre}}</td> <!-- NOMBRE -->
+          <td>{{d.apellido}}</td> <!-- APELLIDO -->
+          <td>{{d.fecha_nacimiento}}</td> <!-- FECHA -->
+          <td>{{d.genero}}</td> <!-- GENERO -->
+          <td>{{d.pais}}</td> <!-- PAIS -->
+          <td>{{d.notificaciones}}</td> <!-- NOTIFICACIONES -->
+          <td>{{d.terminos_condiciones}}</tb> <!--TERMINOS Y CONDICIONES -->
+          <td> <!--EDITAR --> <!--esta en proceso -->
+            <button>Editar</button>
+              
+          </td>
+          <td> <!-- Eliminar -->
+          <a href="{{url_for('delete',id=d.id)}}"><button>Eliminar</button></a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+      
+  </table>
+</div>
+</body>
 </html>

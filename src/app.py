@@ -42,7 +42,7 @@ def home():
 #Ruta para guardar usuarios en la bd
 @app.route('/user_create', methods=['GET','POST'])
 def registrar_usuario():
-    if request.method == 'POST'
+    if request.method == 'POST':
         #obteniendo datos del form
         correo = request.form.get('email')
         password = request.form.get('passw')

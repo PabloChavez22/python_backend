@@ -9,6 +9,9 @@
         <link rel="stylesheet" type="text/css" href="./css/style-color-letra.css">
         <link rel="stylesheet" type="text/css" href="./css/style-sections.css">
         <link rel="stylesheet" href="../static/prueba.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
         
         <title>Programate</title>
 
@@ -16,9 +19,11 @@
     </head>
     <body>
         <h1>Proyecto Python</h1>
-        h2>Tabla base de datos</h2>
-<div>
-  <form action="">
+        
+<h2>Tabla base de datos</h2>
+<!-------------------          ANALIZANDO QUE HACER     ------------------> 
+<!-- <div>
+  <form action="" method="POST">
 
     <div class="input-container">
       <i class="fa fa-user icon"></i>
@@ -37,7 +42,8 @@
   
     <button type="submit" class="btn">Register</button>
   </form>
-</div>
+</div>  -->
+<!-------------------------------------------------------------------------------------------->
 <!--        TABLA      -->
 <div style="overflow-x:auto;">
   <table>
@@ -70,17 +76,55 @@
           <td>{{d.pais}}</td> <!-- PAIS -->
           <td>{{d.notificaciones}}</td> <!-- NOTIFICACIONES -->
           <td>{{d.terminos_condiciones}}</tb> <!--TERMINOS Y CONDICIONES -->
-          <td> <!--EDITAR --> <!--esta en proceso -->
-            <button>Editar</button>
-              
+          <td> <!--EDITAR -->
+            <button id="btn-edit{{d.id}}" data-bs-toggle="modal" data-bs-target="#modal{{d.id}}">Edit</button></td>
           </td>
           <td> <!-- Eliminar -->
-          <a href="{{url_for('delete',id=d.id)}}"><button>Eliminar</button></a>
+            <a href="{{url_for('delete', id=d.id)}}" ><button>Eliminar</button></a>
           </td>
         </tr>
+        <div class="modal fade" id="modal{{d.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{d.username}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form action="/edit/{{d.id}}" method="post">
+                      <label>Correo</label>
+                      <input type="text" class="form-control mb-3" name="Correo" value="{{d.correo}}">
+                      <label>Contraseña</label>
+                      <input type="text" class="form-control mb-3" name="Password" value="{{d.password}}">
+                      <label>Nivel_organizativo</label>
+                      <input type="text" class="form-control mb-3" name="nivel_organizativo" value="{{d.nivel_organizativo}}">
+                      <label>Nombre</label>
+                      <input type="text" class="form-control mb-3" name="Nombre" value="{{d.nombre}}">
+                      <label>Apellido</label>
+                      <input type="text" class="form-control mb-3" name="Apellido" value="{{d.apellido}}">
+                      <label>fecha_nacimiento</label>
+                      <input type="text" class="form-control mb-3" name="fecha_nacimiento" value="{{d.fecha_nacimiento}}">
+                      <label>Genero</label>
+                      <input type="text" class="form-control mb-3" name="genero" value="{{d.genero}}">
+                      <label>Pais</label>
+                      <input type="text" class="form-control mb-3" name="pais" value="{{d.pais}}">
+                      <label>Notificaciones</label>
+                      <input type="text" class="form-control mb-3" name="notificaciones" value="{{d.notificaciones}}">
+                      <label>Terminos_Condiciones</label>
+                      <input type="text" class="form-control mb-3" name="terminos_condiciones" value="{{d.terminos_condiciones}}">
+                
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
       {% endfor %}
     </tbody>
-      
   </table>
 </div>
 </body>

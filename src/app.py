@@ -81,6 +81,16 @@ def registrar_usuario():
     return redirect(url_for('home'))
 
 #eliminé el resto para limpiar vista del .py
+# Ruta para eliminar 
+
+@app.route('/delet/<string:id>')
+def delete (id):
+    cursor =db.database.cursor()
+    sql= "Eliminar Usuario id=%s"
+    data= (id)
+    cursor.execute(sql, data)
+    db.database.commit()
+    return redirect(url_for('home'))
 
 #ejecucion directa del archivo, en el puerto localhost 4000
 if __name__ =='__main__':

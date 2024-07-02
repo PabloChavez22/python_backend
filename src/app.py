@@ -81,16 +81,80 @@ def registrar_usuario():
     return redirect(url_for('home'))
 
 #eliminé el resto para limpiar vista del .py
-# Ruta para eliminar 
 
+# Ruta de la app
+@app.route('/')
+def home():
+    cursor = db.database.cursor()
+    cursor.execute("SELECT * FROM users")
+    myresult=cursor.fetchall()
+    #convierto los datos a diccinario
+    insertObjet = []
+    columnNames = [column[0] for column in cursor.description]
+    for record in myresult:
+        insertObjet.append(dict(zip(columnNames, record)))
+    cursor.close()
+    return render_template('index.html', data=insertObjet)
+
+@app.route('/user', methods=['POST']) 
+def addUser():
+    #obteniendo datos del form
+    correo = request.form['email']
+    password = request.form['passw']
+    nivel_organizativo=request.form['nivel_organizativo']
+    nombre = request.form['name']
+    apellido = request.form['surname']
+    fecha_nacimiento = request.form['fecha-nacimiento']
+    genero = request.form['option_genero']
+    pais = request.form['pais']
+    notificaciones = request.form['notificaciones']
+    terminos_condiciones = request.form['terminos_condiciones']
+
+    if correo and password and nivel_organizativo and nombre and apellido and fecha_nacimiento and genero and pais and notificaciones and terminos_condiciones:
+        cursor=db.database.cursor()
+        sql = "INSERT INTO usuarios (correo, password, nombre, apellido, fecha_nacimiento, genero, pais, notificaciones, terminos_condiciones) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        data = (correo,password,nivel_organizativo,nombre,apellido,fecha_nacimiento,genero,pais,notificaciones,terminos_condiciones)
+        cursor.execute(sql,data)
+        db.database.commit()
+    return redirect(url_for('home'))
+
+
+# Ruta para eliminar 
 @app.route('/delet/<string:id>')
 def delete (id):
     cursor =db.database.cursor()
-    sql= "Eliminar Usuario id=%s"
+    sql= "DELETE FROM usuario WHERE id=%s"
     data= (id)
     cursor.execute(sql, data)
     db.database.commit()
     return redirect(url_for('home'))
+
+
+
+
+# ruta para Edicion
+@app.route('/edit/<string:id>', methods=['POST'])
+def edit(id):
+    correo = request.form['email']
+    password = request.form['passw']
+    nivel_organizativo=request.form['nivel_organizativo']
+    nombre = request.form['name']
+    apellido = request.form['surname']
+    fecha_nacimiento = request.form['fecha-nacimiento']
+    genero = request.form['option_genero']
+    pais = request.form['pais']
+    notificaciones = request.form['notificaciones']
+    terminos_condiciones = request.form['terminos_condiciones']
+
+    if correo and password and nivel_organizativo and nombre and apellido and fecha_nacimiento and genero and pais and notificaciones and terminos_condiciones:
+        cursor=db.database.cursor()
+        sql = "UPDATE INTO usuarios SET correo = %s, password, nombre =%s, apellido =%s, fecha_nacimiento = %s, genero =%s, pais =%s, notificaciones =%s, terminos_condiciones =%s WHERE id=%s"
+        data = (correo,password,nivel_organizativo,nombre,apellido,fecha_nacimiento,genero,pais,notificaciones,terminos_condiciones, id)
+        cursor.execute(sql,data)
+        db.database.commit()
+    return redirect(url_for('home'))
+
+
 
 #ejecucion directa del archivo, en el puerto localhost 4000
 if __name__ =='__main__':
